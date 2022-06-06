@@ -1,0 +1,6 @@
+*.code-workspace
+*.DS_Store
+*.log
+.idea%
+*.csv
+whackAmole/node_modules/

@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <link rel="shortcut icon" href="#" />
+    <title>Cursor Test</title>
+    <style>
+        body {
+        margin: 0px;
+        padding: 0px;
+      }
+        /* Use this tyle for canvas later */
+        .main {
+            /*background: red;*/
+            /* min-width: 100%;
+            min-height: 100%;
+            padding-left: 0%;
+            padding-top: 0%;
+            padding-bottom: 0%;
+            padding-right: 0%;
+            border-width: 0;
+            cursor: none; */
+        }
+        /* #canvas {
+            top:0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+        } */
+    </style>
+</head>
+<body>
+<div class="main">
+    <img class="altMouse" id="scanner" src="stuff/magnifyingCursor50x50.png" alt="Google">
+    <canvas id="canvas" height="600" width="800" ></canvas>
+    
+    Mole game
+    <br>
+    More
+    <br>
+    More
+
+</div>
+</body>
+</html>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+
+    let canvas = document.getElementById('canvas');
+
+    // window.onload = window.onresize = function() {
+    // canvas.width = window.innerWidth * 0.8;
+    // canvas.height = window.innerHeight * 0.8;
+    // };
+
+    // let mydiv = document.querySelector('div');
+
+    let rect = canvas.getBoundingClientRect();
+    // console.log(rect.left);
+    // console.log(mydiv.getBoundingClientRect());
+    
+    // console.log("canvas height: ", canvas.height);
+    // console.log("canvas left: ", canvas.left);
+
+    // console.log(canvas.getBoundingClientRect());
+
+    let context = canvas.getContext('2d');
+    context.font = "30px Arial";
+
+    let creatureX = [];
+    let creatureY = [];
+
+    let score = 0;
+
+    let actualCursorX = 100000;
+    let actualCursorY = 100000;
+    
+
+    $.getJSON("stuff/creature_data_X.json",
+        (Xdata)=>{creatureX = Xdata;});
+    $.getJSON("stuff/creature_data_Y.json",
+        (Ydata)=>{creatureY = Ydata;});
+    
+
+    let creature = new Image();
+    creature.onload = function() {
+
+        // context.drawImage(creature, 50, 50, 50, 53);
+
+        setInterval(()=>{
+
+        context.clearRect(0, 0, canvas.width, canvas.height);
+        context.drawImage(creature, creatureX[0], creatureY[0]);
+        context.fillText(score, 750, 50);
+        
+        creatureX.shift();
+        creatureY.shift();
+
+    }, 20);
+
+    };
+
+    creature.src = 'stuff/alien_bug.png';
+    
+    let voffset = [];
+    let hoffset = [];
+
+    $.getJSON("stuff/data.json",
+        (data)=>{voffset = data;});
+    $.getJSON("stuff/data2.json",
+        (data2)=>{hoffset = data2;});
+    
+    // setInterval(()=>{
+    //     voffset.shift();
+    //     hoffset.shift();
+    // }, 20);
+
+    function badmouse(time1, time2 = 60000){
+        let mousenoise = setInterval(()=>{
+            voffset.shift();
+            hoffset.shift();
+            $('#scanner').offset({
+                left: actualCursorX + hoffset[0] -17,
+                top: actualCursorY + voffset[0] -18
+            });
+        }, time1);
+        setTimeout(() => {clearInterval(mousenoise)}, time2);
+    };
+
+    setTimeout(badmouse, 10000)
+    
+
+    $(document).mousemove(function (e) {
+        $('.altMouse').offset({
+            left: e.pageX + hoffset[0] -17,
+            top: e.pageY + voffset[0] -18
+            // left: (e.pageX - 17),
+            // top: (e.pageY- 18)
+        });
+        actualCursorX = e.pageX;
+        actualCursorY = e.pageY;
+        cursorX = (e.pageX + hoffset[0]) - rect.left;
+        cursorY = (e.pageY + voffset[0]) - rect.top;
+        // console.log("actual mouse: ",  e.pageX, e.pageY);
+        // console.log((e.pageX + hoffset[0]) - rect.left);
+        // console.log("cursor: ", cursorX);
+    });
+
+
+let cursorX = 1000000;
+let cursorY = 1000000;
+
+// canvas.onmousemove = function(e) {
+//     cursorX = e.pageX + hoffset[0] - 17;
+//     cursorY = e.pageY + voffset[0] - 18;
+// };
+
+
+setInterval(()=>{
+    // console.log("offset: ", voffset[0], hoffset[0]);
+    // console.log("mouse: ", cursorX, " , ", cursorY);
+    // console.log("creature: ", creatureX[0],", ", creatureY[0]);
+    // console.log("    ");
+    // if(cursorX < creatureX[0] - 25){
+    //     console.log("too left");
+    //     console.log(cursorX - creatureX[0] - 25);
+    // };
+    // if (cursorX > creatureX[0] + 50 + 5){
+    //     console.log("too right");
+    //     console.log(cursorX - creatureX[0] + 50 + 25);
+    // };
+    // if(cursorY < creatureY[0] -25){
+    //     console.log("too high");
+    //     console.log(cursorY - creatureY[0]);
+    // };
+    // if (cursorY > creatureY[0] + 53){
+    //     console.log("too low");
+    //     console.log(cursorY - (creatureY[0] + 53));
+    // };
+    if (cursorX >= creatureX[0] - 15 && cursorX <= creatureX[0] + 50 + 15 && cursorY >= creatureY[0] && cursorY <= creatureY[0] + 53 + 15) {
+        // console.log("on it");
+        console.log(cursorX , creatureX[0]);
+        console.log(cursorY, creatureY[0]);
+            score += 3;
+        } else {
+            score -= 1;
+            score = Math.max(score, 0);
+        };
+        context.clearRect(0, 0, canvas.width, canvas.height);
+        context.drawImage(creature, creatureX[0], creatureY[0]);
+        context.fillText(score, 750, 50);
+    }, 20);
+
+</script>

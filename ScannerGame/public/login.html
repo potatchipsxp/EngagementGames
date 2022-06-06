@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script>
+            function consentcheck() {
+                if(!document.getElementById("consent").checked){
+                    alert("the experiment cannot proceed without consent");
+                }
+            }
+            </script>
+        <title>Read Before You Proceed</title>
+        <h1>Informed Consent</h1>
+        </head>
+    <body>
+        <h2>Key Information</h2>
+        <p style="padding: 10px; border: 2px solid black;">
+            You are invited to participate in a research study designed to investigate user experience.  Participation in research is completely voluntary. <br>
+            The purpose of the study is to develop a better understanding of how user experiences relate to movement dynamics. <br>
+            The study will take less than 15 minutes. You will be asked to play a 3 minute game, and then answer 8 questions about your experience and 4 questions about yourself.  <br>
+            There are no known risks to this study.<br>
+            There is no direct benefit to you other than the compensation for your time. The results from the study may be used to improve user experience on websites and with interactive material in a variety contexts.
+        </p>
+
+        <p>
+            This study is being conducted by Timothy Meyer, a graduate student in the Cognitive and Information Sciences Department at University of California, Merced and Dr. Jeff Yoshimi, Professor of Cognitive Science, University of California, Merced. Timothy is available at tmeyer3@ucmerced.edu and Jeff is available at jyoshimi@ucmerced.edu
+        </p>
+        <h3>Purpose</h3>
+        <p>
+            You are being asked to participate in a research study.  We hope to learn how participants match to the movements of a moving target on screen. In addition, we hope to gain insight in how participant movements while using a mouse relate to their experience. Finally, we also hope to understand how changes to the movements involved in the task change the movements performed by the participants.        </p>
+
+        <h3>Procedures</h3>
+        <p>
+            If you decide to volunteer, you will be asked to play a 3-minute game involving tracking a moving target on screen. After the game is over, you will be asked a series of 8 questions about your experience. Then you will be asked 4 questions about yourself, such as “how many hours did you play video games per week growing up?”. Finally, you will be taken to a thank you page where you will be thanked for your time and provided a code to prove that you completed the study. All together this should take 5-10 minutes.
+        </p>
+        <h3>Risks</h3>
+        <p>
+            There are no risks to you for your participation in this study. As regards a breach of confidentiality: As with all research, there is a chance that confidentiality could be compromised; however, we are taking precautions to minimize this risk. Also, we are not collecting any indentifiable information which further minimizes the risk posed to you.
+        </p>
+        <h3>Benefits</h3>
+        <p>
+            It is possible that you will not benefit directly by participating in this study, other than the compensation for your time.        
+        </p>
+        <h3>Confidentiality </h3>		
+					
+        <p>        
+            We will not collect any data which could be used to identify you individually. In addition, as we plan to make a cleaned version of this data available in accordance with open science guidelines, we will remove any data that is provided and could be used to identify individual participants. However, absolute confidentiality cannot be guaranteed, since research documents are not protected from subpoena.
+        </p>
+
+        <h3>Costs/Compensation</h3>
+        <p>            
+            There is no cost to you beyond the time and effort required to complete the procedure(s) described above. You will be compensated with $1.50 for your time, even if you do not finish the experiment. However, if you do not finish you will need to contact us so that we may verify your HIT.
+        </p>
+        <h3>Right to Refuse or Withdraw </h3>
+        <p>            
+            Participation is completely voluntary.  You may refuse to participate in this study.  You may change your mind about being in the study and quit after the study has started.
+        </p>
+        <h3>Questions</h3>									
+        <p>
+            If you have any questions about this research project please contact Timothy Meyer who will answer them at tmeyer3@ucmerced.edu.
+        <br>
+        <br>
+            For questions about your rights while taking part in this study call the Office of Research at (209) 228-4613 or write to the Office of Research,5200 North Lake Rd, UC Merced, Merced, CA 95343.  The Office of Research will inform the Institutional Review Board which is a group of people who review the research to protect your rights.  If you have any complaints or concerns about this study, you may address them to Ramesh Balasubramaniam, Chair of the IRB at (209) 228-2314, irbchair@ucmerced.edu.
+        </p>
+
+        <p>
+            RESULTS: Results from this study will be available from Timothy Meyer at tmeyer3@ucmerced.edu after June 30, 2023.
+        </p>
+        <p>
+        	IRB APPROVED: This study has been approved by the Institutional Review Board of University California Merced. The University requires that you give your consent before participating in this study.
+        </p>
+        <p>
+        	Please fill out the questions at the bottom and place a check or an X in the space provided below to acknowledge that you are at least 18 years old and have read and understand the statements above. By marking the space below you give consent to participate voluntarily in this study. Thank you very much.
+        </p>
+        <br>
+
+
+        <form id="prelim" action="/setup" method="post">
+
+            <input type="radio" name="input_device" value="mouse"> mouse<br>
+            <input type="radio" name="input_device" value="trackpad"> trackpad<br>
+            <input type="radio" name="input_device" value="other"> other<br>
+            <br>
+            <input type="radio" id="consent" name="consent" value="consent">
+            <label>Participant's consent</label>
+            <br>
+            <button onclick="return consentcheck()">Submit</button>
+        </form>
+        <br>
+    </body>
+</html>

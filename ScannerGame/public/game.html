@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Task Page</title>
+        <style>
+            /* Use this tyle for canvas later */
+            .canvases {
+                /*background: red;*/
+                min-width: 850px;
+                min-height: 650px;
+                /* cursor: none; */
+            }
+        </style>
+
+        <link rel='stylesheet' type='text/css' href='game.css'/>             
+    </head>
+    <body>
+        <div class="wrapper">
+            <div class="canvases" id="canvases">
+                <canvas id="canvas" width="850" height="650"></canvas>
+                <!-- <canvas id="littlecanvas" width="550" height="500"></canvas> -->
+            </div>
+            <div class="writing">
+                <p id="instructions">
+                    You are a level 1 scientist tasked with scanning a new creature found on an alien planet. Keep your scanner, the magnifier 3000x, on the creature as much as possible so that the computer can gather data on the creature. The amount of data gathered will be displayed in the upper right hand corner. Data decays slowly when the scanner is not on the creature. Try to gather as much data as possible, you only have a few minutes. Before you work with an actual creature we will have a practice run with a somewhat tame creature. After the game is over you will be asked a series of questions about your experience. Then you will be taken to a debriefing screen where you will be thanked and debriefed. Do not click back or refresh the page during the game or your progress will be lost. <br><br><br> When you are ready, click the rectangle.
+                </p>
+                <p id="readyUp">
+                    You are done with practice. On the next screen will be a much more active specimen that we need scanned. The IDs and scores of our best scientists will be the top left corner of your screen.<br> Please do your best.<br><br> When you are ready to begin, click the rectangle.
+                </p>
+            </div>
+            <div class="gameoverwriting">
+                <p id="gameover" name="gameover">
+                    Thank you for your participation. This was an experiment designed to examine user experience. If you would like to know more about this experiment or are curious about its results, contact Timothy Meyer at tmeyer3@ucmerced.edu. If you feel your rights as a participant were violated you may contact: Ramesh Balasubramaniam, irbchair@ucmerced.edu, Ph. no: 209-383-8655.<br>
+
+                    Your payment code is:  <span id="key"></span>
+                </p>
+            </div>
+            <div class="wrap">
+                    <form id= "Qform" action="" onsubmit="return false">
+                        <label class="statement">I blocked out things around me when I was playing the game on this website.</label>
+                        <ul class='Q1'>
+                            <li>
+
+                                <label id="Q1right">Stongly agree</label>
+                                <input type="range" name="Q1ans" min="1" max="100" value="1" class="slider" id="Q1slider">
+                                <label id="Q1left">Strongly disagree</label>
+                            </li>
+                        </ul>
+                        <label class="statement">When I was playing the game, I lost track of the world around me.</label>
+                        <ul class='Q2'>
+                            <li>
+
+                                <label id="Q2right">Stongly agree</label>
+                                <input type="range" name="Q2ans" min="1" max="100" value="1" class="slider" id="Q2slider">
+                                <label id="Q2left">Strongly disagree</label>
+                            </li>
+                        </ul>
+                        <label class="statement">The time I spent playing the game just slipped away.</label>
+                        <ul class='Q4'>
+                            <li>
+                                <label id="Q4right">Stongly agree</label>
+                                <input type="range" name="Q4ans" min="1" max="100" value="1" class="slider" id="Q4slider">
+                                <label id="Q4left">Strongly disagree</label>
+                            </li>
+                        </ul>
+                        <label class="statement">I was absorbed in my gaming task.</label>
+                        <ul class='Q5'>
+                            <li>
+                                <label id="Q5right">Stongly agree</label>
+                                <input type="range" name="Q5ans" min="1" max="100" value="1" class="slider" id="Q5slider">
+                                <label id="Q5left">Strongly disagree</label>
+                            </li>
+                        </ul>
+                        <label class="statement">I was so involved in my gaming task that I lost track of time.</label>
+                        <ul class='Q7'>
+                            <li>
+                                <label id="Q7right">Stongly agree</label>
+                                <input type="range" name="Q7ans" min="1" max="100" value="1" class="slider" id="Q7slider">
+                                <label id="Q7left">Strongly disagree</label>
+                            </li>
+                        </ul>
+                        <label class="statement">During this gaming experience I let myself go.</label>
+                        <ul class='Q8'>
+                            <li>
+                                <label id="Q8right">Stongly agree</label>
+                                <input type="range" name="Q8ans" min="1" max="100" value="1" class="slider" id="Q8slider">
+                                <label id="Q8left">Strongly disagree</label>
+                            </li>
+                        </ul>    
+                        <label class="statement">I lost myself in this gaming experience.</label>
+                        <ul class='Q10'>
+                            <li>
+                                <label id="Q10right">Stongly agree</label>
+                                <input type="range" name="Q10ans" min="1" max="100" value="1" class="slider" id="Q10slider">
+                                <label id="Q10left">Strongly disagree</label>
+                            </li>
+                        </ul>
+                        <label class="statement">I was really drawn into my gaming task.</label>
+                        <ul class='Q11'>
+                            <li>
+                                <label id="Q11right">Stongly agree</label>
+                                <input type="range" name="Q11ans" min="1" max="100" value="1" class="slider" id="Q11slider">
+                                <label id="Q11left">Strongly disagree</label>
+                            </li>
+                        </ul>
+                        <div class="buttons">
+                        <button onclick="return backtoGame(Qform)">Submit</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="demogs">
+                    <form id="demogQs" action="" onsubmit="return false">
+                        
+                        <label>Is english your first language?</label>
+                        <br>
+                        <input type="radio" name="LangQ" value="yes">yes<br>
+                        <input type="radio" name="LangQ" value="no">no<br>
+                        <br>
+                        <label>How many letters are in the english alphabet?</label>
+                        <br>
+                        <input type="radio" name="CatchQ" value="20">20<br>
+                        <input type="radio" name="CatchQ" value="10">10<br>
+                        <input type="radio" name="CatchQ" value="58">58<br>
+                        <input type="radio" name="CatchQ" value="26">26<br>
+                        <br>
+                        <label>Growing up, how many hours per week did you play video games?</label>
+                        <br>
+                        <input type="radio" name="hoursplayedgrowingup" value="0">zero<br>
+                        <input type="radio" name="hoursplayedgrowingup" value="<1">less than one<br>
+                        <input type="radio" name="hoursplayedgrowingup" value="1-2">one to two<br>
+                        <input type="radio" name="hoursplayedgrowingup" value="2-4">two to four<br>
+                        <input type="radio" name="hoursplayedgrowingup" value="4-8">four to eight<br>
+                        <input type="radio" name="hoursplayedgrowingup" value=">8">more than 8<br>
+                        <br>
+                        <label>How many hours per week do you play video games now?</label>
+                        <br>
+                        <input type="radio" name="hoursplayednow" value="0">zero<br>
+                        <input type="radio" name="hoursplayednow" value="<1">less than one<br>
+                        <input type="radio" name="hoursplayednow" value="1-2">one to two<br>
+                        <input type="radio" name="hoursplayednow" value="2-4">two to four<br>
+                        <input type="radio" name="hoursplayednow" value="4-8">four to eight<br>
+                        <input type="radio" name="hoursplayednow" value=">8">more than 8<br>
+                        <br>
+                        <br>
+                        <button onclick="return backtoGame(demogForm)">Submit</button>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                    </form>
+                </div>
+        </div>
+        <img class="altMouse" id="scanner" src="stuff/magnifyingCursor50x50.png">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script type='text/javascript' src='game.js'></script>
+    </body>
+</html>
